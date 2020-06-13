@@ -19,6 +19,8 @@
 ## 動かし方
 
 ```bash
+$ cd php-docker-sample/infra
+
 # docker起動
 $ docker-compose up -d
 
@@ -26,7 +28,7 @@ $ docker-compose up -d
 $ docker-compose exec app sh
 
 # laravelプロジェクトの作成
-$ composer create-project --prefer-dist laravel/laravel
+$ composer create-project --prefer-dist laravel/laravel .
 ```
 
 
@@ -34,7 +36,7 @@ $ composer create-project --prefer-dist laravel/laravel
 
 ```bash:terminal
 $ pwd 
-php-docker-sample
+../php-docker-sample/infra
 
 $ touch Makefile
 ```
