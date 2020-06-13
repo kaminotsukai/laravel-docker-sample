@@ -1,0 +1,43 @@
+version: "3.7"
+volumes:
+  db-store:
+  php-fpm-socket:
+
+services:
+  app:
+    build: ./docker/php
+    volumes:
+      - php-fpm-socket:/var/run/php-fpm
+      - ../backend:/work/backend
+      - ./docker/php/bash/.bash_history:/root/.bash_history
+      - ./docker/php/bash/psysh:/root/.config/psysh
+
+  web:
+    build: ./docker/nginx
+    ports:
+      - 16000:80
+    volumes:
+      - php-fpm-socket:/var/run/php-fpm
+      - ../backend:/work/backend
+
+  mysql:
+    image: mysql:5.7.22
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    volumes:
+      - db-store:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpasswd
+      - MYSQL_DATABASE=xxx
+      - MYSQL_USER=xxx
+      - MYSQL_PASSWORD=xxx
+      - TZ=Asia/Tokyo
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=0
+      - PMA_HOSTS=phrase_mysql
+    links:
+      - mysql
+    ports:
+      - 16789:80
