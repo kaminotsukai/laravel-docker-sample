@@ -4,16 +4,31 @@
 
 ```yml:docker-compose.yml
   mysql:
-    image: mysql:5.7.22
+    image: mysql:5.7
     command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
     volumes:
-      - db-store:/var/lib/mysql
+      - ./db-store:/var/lib/mysql
+      - ./docker/mysql:/etc/mysql/conf.d
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpasswd
-      - MYSQL_DATABASE=xxx  #変更
-      - MYSQL_USER=xxx      #変更
-      - MYSQL_PASSWORD=xxx  #変更
+      - MYSQL_ROOT_PASSWORD=password  #変更
+      - MYSQL_DATABASE=xxx            #変更
+      - MYSQL_USER=xxx                #変更
+      - MYSQL_PASSWORD=xxx            #変更
       - TZ=Asia/Tokyo
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=0
+      - PMA_HOSTS=mysql
+      - PMA_USER=xxx                  #変更
+      - PMA_PASSWORD=xxx              #変更
+    links:
+      - mysql
+    ports:
+      - 16789:80
 ```
 
 ## 動かし方
@@ -22,28 +37,11 @@
 $ cd php-docker-sample/infra
 
 # docker起動
-$ docker-compose up -d
+$ make up
 
 # appコンテナに入る
-$ docker-compose exec app sh
+$ make app
 
 # laravelプロジェクトの作成
 $ composer create-project --prefer-dist laravel/laravel .
-```
-
-
-## お好みでMakefileなど
-
-```bash:terminal
-$ pwd 
-../php-docker-sample/infra
-
-$ touch Makefile
-```
-
-以下のようにMakefileに記述すれば、`make web`でwebコンテナに入れるようになるから楽かも
-
-```Makefile
-web:
-	docker-compose exec web ash
 ```
