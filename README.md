@@ -16,6 +16,20 @@
       - TZ=Asia/Tokyo
 ```
 
+## 動かし方
+
+```bash
+# docker起動
+$ docker-compose up -d
+
+# appコンテナに入る
+$ docker-compose exec app sh
+
+# laravelプロジェクトの作成
+$ composer create-project --prefer-dist laravel/laravel
+```
+
+
 ## お好みでMakefileなど
 
 ```bash:terminal
