@@ -1,5 +1,9 @@
 # laravel-docker-sample
 
+laravel(+node)の環境ができるDockerfile
+
+このdockerfileをパワーアップしてくれる勇者がいたらマジ大歓迎
+
 ## docker-compose.ymlの修正
 
 ```yml:docker-compose.yml
@@ -45,3 +49,8 @@ $ make app
 # laravelプロジェクトの作成
 $ composer create-project --prefer-dist laravel/laravel .
 ```
+
+
+## Makefile
+
+好きなの追加して
