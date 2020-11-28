@@ -8,7 +8,10 @@ RUN apt-get update \
 # nodejs install
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && apt-get install -y nodejs \
-  && apt-get install -y vim
+  && apt-get install -y vim \
+  && docker-php-ext-install sockets \
+  && pecl install xdebug \
+  && docker-php-ext-enable xdebug
 
 # Composer install
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -16,4 +19,4 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 ENV PATH $PATH:/composer/vendor/bin
 
-WORKDIR /work/backend
+WORKDIR /work/web
