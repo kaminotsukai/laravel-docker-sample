@@ -13,8 +13,9 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && pecl install xdebug \
   && docker-php-ext-enable xdebug
 
-# Composer install
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+# Composer2.0 install
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer self-update --2
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 ENV PATH $PATH:/composer/vendor/bin
