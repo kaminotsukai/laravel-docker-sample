@@ -17,3 +17,18 @@ $ make up
 
 $ make laravel-install
 ```
+
+### laravel 側の.env の修正
+
+laravel 側の.env に接続先の DB 情報を記述する
+
+```
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=[DB_DATABASE]
+DB_USERNAME=[DB_USERNAME]
+DB_PASSWORD=[DB_PASSWORD]
+
+```
