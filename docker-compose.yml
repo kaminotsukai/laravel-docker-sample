@@ -28,8 +28,6 @@ services:
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD:-password}
       - TZ=Asia/Tokyo
-    ports:
-      - ${DB_PORT:-3306}:3306
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
