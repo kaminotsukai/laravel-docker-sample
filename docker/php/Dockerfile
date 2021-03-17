@@ -1,8 +1,12 @@
-FROM php:7.2-fpm
+FROM devilbox/php-fpm-8.0
 COPY php.ini /usr/local/etc/php/
 
 RUN apt-get update \
-  && apt-get install -y zlib1g-dev mariadb-client unzip \
+  && apt-get install -y \
+  libzip-dev \
+  zlib1g-dev \
+  mariadb-client \
+  unzip \
   && docker-php-ext-install zip pdo_mysql
 
 # nodejs install
