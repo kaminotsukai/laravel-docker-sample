@@ -1,6 +1,8 @@
 FROM devilbox/php-fpm-8.0
 COPY php.ini /usr/local/etc/php/
 
+ADD docker/php/setup/xdebug.ini /tmp/xdebug.ini
+
 RUN apt-get update \
   && apt-get install -y \
   libzip-dev \
