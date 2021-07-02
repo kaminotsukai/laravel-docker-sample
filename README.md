@@ -18,6 +18,13 @@ $ make up
 $ make laravel-install
 ```
 
+※ Linuxの方はこちらもお願いします（permissionエラー対応）
+
+```
+# ホストのユーザーとグループを指定してください。
+$ sudo chown -R {user_name}:{group_name} web
+```
+
 ### laravel 側の.env の修正
 
 laravel 側の.env に接続先の DB 情報を記述する
