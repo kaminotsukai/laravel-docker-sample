@@ -9,7 +9,7 @@ services:
   web:
     image: nginx
     ports:
-      - ${WEB_PORT}:80
+      - ${IP}:80:80
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./web:/work/web
@@ -39,4 +39,4 @@ services:
     links:
       - mysql
     ports:
-      - ${PMA_PORT}:80
+      - ${IP}:1234:80
